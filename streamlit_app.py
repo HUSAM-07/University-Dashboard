@@ -42,7 +42,7 @@ def main():
     st.markdown("---")
     st.subheader("BITS ERP")
     st.markdown('<div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;">'
-                '<iframe src="https://erp.bits-pilani.ac.in/" width="800" height="400"></iframe>'
+                '<iframe src="https://erp.bits-pilani.ac.in/" width="1000" height="400"></iframe>'
                 '</div>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
