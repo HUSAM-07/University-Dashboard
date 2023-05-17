@@ -47,3 +47,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+st.divider()
+st.caption("Designed & Developed by HUSAM")
