@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 def main():
     st.title("University Clubs Dashboard")
@@ -50,5 +51,3 @@ if __name__ == '__main__':
 st.divider()
 st.caption("Designed & Developed by HUSAM")
 
-#Page Settings
-st.set_page_config(layout="wide")
