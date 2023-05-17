@@ -4,7 +4,6 @@ st.set_page_config(layout="wide")
 
 
 def main():
-    st.set_page_config(layout="wide")
 
     st.title("University Clubs Dashboard")
     st.markdown("---")
