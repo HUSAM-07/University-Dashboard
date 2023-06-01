@@ -20,6 +20,7 @@ def main():
 
     st.divider()
     st.caption("Designed & Developed by HUSAM")
+    st.caption("The app is designed using streamlit")
 
 
 def show_homepage():
