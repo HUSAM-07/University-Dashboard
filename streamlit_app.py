@@ -1,8 +1,12 @@
 import streamlit as st
+import spacy
 import numpy as np
 import pandas as pd
+from gensim.models import Word2Vec
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+
+# Load a pre-trained English language model from spaCy
+nlp = spacy.load("en_core_web_sm")
 
 # Sample previous year questions for demonstration purposes
 previous_year_questions = [
@@ -15,15 +19,31 @@ previous_year_questions = [
 
 # Function to preprocess and vectorize text data
 def preprocess_text(text):
-    # Simple preprocessing: lowercase and remove punctuation
-    text = text.lower()
-    text = ''.join([c for c in text if c.isalnum() or c.isspace()])
-    return text
+    doc = nlp(text)
+    # Lemmatize and remove stopwords
+    tokens = [token.lemma_ for token in doc if not token.is_stop]
+    return " ".join(tokens)
 
 # Vectorize and preprocess previous year questions
 vectorizer = CountVectorizer()
 previous_year_questions = [preprocess_text(question) for question in previous_year_questions]
 question_vectors = vectorizer.fit_transform(previous_year_questions)
+
+# Train a Word2Vec model on the preprocessed questions
+w2v_model = Word2Vec([question.split() for question in previous_year_questions], vector_size=100, window=5, min_count=1, sg=0)
+
+# Sample data for user-specific content
+user_data = {
+    "user": {
+        "name": "John Doe",
+        "courses": ["Calculus", "Physics", "Computer Science"],
+        "bookmarks": ["How to study effectively", "Useful resources for Physics"]
+    }
+}
+
+# Function to fetch user data
+def get_user_data(username):
+    return user_data.get(username, {})
 
 def main():
     st.set_page_config(page_title="unidash", layout="centered")
@@ -93,10 +113,11 @@ def show_profile():
     username = st.sidebar.text_input("Username")
     password = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Login"):
-        # You can customize this section if needed
         if authenticate(username, password):
-            st.write(f"Welcome, {username}!")
-            st.write("User-specific content can go here.")
+            user_info = get_user_data(username)
+            st.write(f"Welcome, {user_info.get('name', 'User')}!")
+            st.write(f"Enrolled Courses: {', '.join(user_info.get('courses', []))}")
+            st.write(f"Bookmarks: {', '.join(user_info.get('bookmarks', []))}")
         else:
             st.warning("Invalid username or password.")
 
