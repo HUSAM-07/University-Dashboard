@@ -47,6 +47,7 @@ def get_user_data(username):
     return user_data.get(username, {})
 
 def main():
+    st.set_page_config(page_title="unidash",layout="centered")
     st.title("University Student Dashboard")
     st.markdown("---")
 
@@ -66,7 +67,7 @@ def main():
         show_profile()
 
     st.divider()
-    st.caption("Designed & Developed by [Your Name]")
+    st.caption("Designed & Developed by Mohammed Husamuddin")
     st.caption("The app is designed using Streamlit")
 
 def show_homepage():
