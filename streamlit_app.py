@@ -1,7 +1,6 @@
 import streamlit as st
 
 def main():
-    # Page Config
     st.set_page_config(layout="centered",page_title="unidash")
     st.title("University Clubs Dashboard")
     st.markdown("---")
@@ -30,30 +29,60 @@ def show_clubs_resources():
     st.markdown("---")
 
     st.subheader("GDSC Resources")
-    st.markdown('<iframe src="https://gdscbpdc.github.io/" width="800" height="400"></iframe>', unsafe_allow_html=True)
+    st.components.v1.html(
+        f'<iframe src="https://gdscbpdc.github.io/" width="100%" height="400" style="border: none;"></iframe>',
+        width=800,
+        height=400,
+        scrolling=True,
+    )
 
     st.markdown("---")
     st.subheader("ACM Resources")
-    st.markdown('<iframe src="https://openlib-cs.acmbpdc.org/" width="800" height="400"></iframe>', unsafe_allow_html=True)
+    st.components.v1.html(
+        f'<iframe src="https://openlib-cs.acmbpdc.org/" width="100%" height="400" style="border: none;"></iframe>',
+        width=800,
+        height=400,
+        scrolling=True,
+    )
 
     st.markdown("---")
     st.subheader("Ahmed Thahir's Notes")
-    st.markdown('<iframe src="https://uni-notes.netlify.app/" width="800" height="400"></iframe>', unsafe_allow_html=True)
+    st.components.v1.html(
+        f'<iframe src="https://uni-notes.netlify.app/" width="100%" height="400" style="border: none;"></iframe>',
+        width=800,
+        height=400,
+        scrolling=True,
+    )
 
 def show_university_resources():
     st.header("University Resources")
     st.markdown("---")
 
     st.subheader("Library Resources")
-    st.markdown('<iframe src="http://webopac.bits-dubai.ac.ae/AutoLib/index.jsp" width="800" height="400"></iframe>', unsafe_allow_html=True)
+    st.components.v1.html(
+        f'<iframe src="http://webopac.bits-dubai.ac.ae/AutoLib/index.jsp" width="100%" height="400" style="border: none;"></iframe>',
+        width=800,
+        height=400,
+        scrolling=True,
+    )
 
     st.markdown("---")
     st.subheader("Courses & LMS")
-    st.markdown('<iframe src="https://lms.bitspilanidubai.ae/login/index.php" width="800" height="400"></iframe>', unsafe_allow_html=True)
+    st.components.v1.html(
+        f'<iframe src="https://lms.bitspilanidubai.ae/login/index.php" width="100%" height="400" style="border: none;"></iframe>',
+        width=800,
+        height=400,
+        scrolling=True,
+    )
 
     st.markdown("---")
     st.subheader("BITS ERP")
-    st.markdown('<iframe src="https://erp.bits-pilani.ac.in/" width="800" height="400"></iframe>', unsafe_allow_html=True)
+    st.components.v1.html(
+        f'<iframe src="https://erp.bits-pilani.ac.in/" width="100%" height="400" style="border: none;"></iframe>',
+        width=800,
+        height=400,
+        scrolling=True,
+    )
 
 if __name__ == '__main__':
     main()
