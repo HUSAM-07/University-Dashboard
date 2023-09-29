@@ -1,12 +1,8 @@
 import streamlit as st
-import spacy
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
-# Load a pre-trained English language model from spaCy
-nlp = spacy.load("en_core_web_sm")
 
 # Sample previous year questions for demonstration purposes
 previous_year_questions = [
@@ -19,62 +15,90 @@ previous_year_questions = [
 
 # Function to preprocess and vectorize text data
 def preprocess_text(text):
-    doc = nlp(text)
-    # Lemmatize and remove stopwords
-    tokens = [token.lemma_ for token in doc if not token.is_stop]
-    return " ".join(tokens)
+    # Simple preprocessing: lowercase and remove punctuation
+    text = text.lower()
+    text = ''.join([c for c in text if c.isalnum() or c.isspace()])
+    return text
 
 # Vectorize and preprocess previous year questions
 vectorizer = CountVectorizer()
 previous_year_questions = [preprocess_text(question) for question in previous_year_questions]
 question_vectors = vectorizer.fit_transform(previous_year_questions)
 
-# Sidebar configuration
-st.sidebar.title("Navigation")
-section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources", "Chatbot", "Profile"))
+def main():
+    st.set_page_config(page_title="unidash", layout="centered")
+    st.title("University Student Dashboard")
+    st.markdown("---")
 
-# Main content
-st.set_page_config(page_title="University Student Dashboard", layout="centered")
-st.title("University Student Dashboard")
-st.markdown("---")
+    # Sidebar
+    st.sidebar.title("Navigation")
+    section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources", "Chatbot", "Profile"))
 
-if section == "Home":
+    if section == "Home":
+        show_homepage()
+    elif section == "Clubs Resources":
+        show_clubs_resources()
+    elif section == "University Resources":
+        show_university_resources()
+    elif section == "Chatbot":
+        show_chatbot()
+    elif section == "Profile":
+        show_profile()
+
+    st.divider()
+    st.caption("Designed & Developed by Mohammed Husamuddin")
+    st.caption("The app is designed using Streamlit")
+
+def show_homepage():
     st.header("Welcome to the University Student Dashboard!")
     st.write("Use the sidebar to navigate to different sections.")
-elif section == "Clubs Resources":
+
+def show_clubs_resources():
     st.header("Clubs Resources")
     st.markdown("---")
+
     # ... Your club resources content ...
-elif section == "University Resources":
+
+def show_university_resources():
     st.header("University Resources")
     st.markdown("---")
+
     # ... Your university resources content ...
-elif section == "Chatbot":
+
+def show_chatbot():
     st.header("Chatbot - Predicting Questions")
     st.markdown("---")
+
     user_question = st.text_input("Ask a question:")
     if user_question:
         # Preprocess the user's question
         user_question = preprocess_text(user_question)
+
         # Calculate cosine similarity between user's question and previous year questions
         user_question_vector = vectorizer.transform([user_question])
         similarities = cosine_similarity(user_question_vector, question_vectors)
+
         # Find the most similar question from previous year questions
         most_similar_index = similarities.argmax()
         suggested_question = previous_year_questions[most_similar_index]
+
         st.subheader("Suggested Question for This Year:")
         st.write(suggested_question)
-elif section == "Profile":
+
+def show_profile():
     st.header("User Profile")
     st.markdown("---")
+
     st.sidebar.subheader("Login")
     username = st.sidebar.text_input("Username")
     password = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Login"):
+        # You can customize this section if needed
         if authenticate(username, password):
-            user_info = get_user_data(username)
-            st.write(f"Welcome, {user_info.get('name', 'User')}!")
-            st.write(f"Enrolled Courses: {', '.join(user_info.get('courses', []))}")
-            st.write(f"Bookmarks: {', '.join(user_info.get('bookmarks', []))}")
+            st.write(f"Welcome, {username}!")
+            st.write("User-specific content can go here.")
         else:
             st.warning("Invalid username or password.")
+
+if __name__ == '__main__':
+    main()
