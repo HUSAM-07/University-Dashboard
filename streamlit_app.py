@@ -22,7 +22,20 @@ def main():
 
 def show_homepage():
     st.header("Welcome to the University Clubs Dashboard!")
-    st.write("Use the sidebar to navigate to different sections.")
+    st.write("Explore a world of opportunities and resources available at your fingertips with the University Clubs Dashboard. Whether you're a student looking to engage in exciting club activities or seeking essential university resources, this platform is your gateway to a richer and more fulfilling academic experience.")
+
+    st.write("Navigate through the sidebar to discover the following sections:")
+
+    st.subheader("1. Home")
+    st.write("You are currently on the Home page. Use this page as a starting point to access various sections of the dashboard.")
+
+    st.subheader("2. Clubs Resources")
+    st.write("Discover a plethora of resources offered by your university clubs. From coding to gaming, explore materials, events, and updates from your favorite clubs, including GDSC and ACM.")
+
+    st.subheader("3. University Resources")
+    st.write("Access vital university resources with just a click. Explore the library's vast collection, log in to the Learning Management System (LMS) for your courses, and manage your academic life through BITS ERP.")
+
+    st.write("Get ready to embark on an enriched educational journey. Start exploring now!")
 
 def show_clubs_resources():
     st.header("Clubs Resources")
