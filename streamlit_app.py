@@ -1,6 +1,8 @@
 import streamlit as st
 
 def main():
+    # Page Config
+    st.set_page_config(layout="centered",page_title="unidash")
     st.title("University Clubs Dashboard")
     st.markdown("---")
 
