@@ -1,49 +1,5 @@
 import streamlit as st
-import spacy
-import numpy as np
 import pandas as pd
-from gensim.models import Word2Vec
-from sklearn.feature_extraction.text import CountVectorizer
-
-# Load a pre-trained English language model from spaCy
-nlp = spacy.load("en_core_web_sm")
-
-# Sample previous year questions for demonstration purposes
-previous_year_questions = [
-    "What are the main concepts in calculus?",
-    "How do you solve differential equations?",
-    "Explain the principles of quantum mechanics.",
-    "What is the significance of the theory of relativity?",
-    "Discuss the applications of artificial intelligence."
-]
-
-# Function to preprocess and vectorize text data
-def preprocess_text(text):
-    doc = nlp(text)
-    # Lemmatize and remove stopwords
-    tokens = [token.lemma_ for token in doc if not token.is_stop]
-    return " ".join(tokens)
-
-# Vectorize and preprocess previous year questions
-vectorizer = CountVectorizer()
-previous_year_questions = [preprocess_text(question) for question in previous_year_questions]
-question_vectors = vectorizer.fit_transform(previous_year_questions)
-
-# Train a Word2Vec model on the preprocessed questions
-w2v_model = Word2Vec([question.split() for question in previous_year_questions], vector_size=100, window=5, min_count=1, sg=0)
-
-# Sample data for user-specific content
-user_data = {
-    "user": {
-        "name": "John Doe",
-        "courses": ["Calculus", "Physics", "Computer Science"],
-        "bookmarks": ["How to study effectively", "Useful resources for Physics"]
-    }
-}
-
-# Function to fetch user data
-def get_user_data(username):
-    return user_data.get(username, {})
 
 def main():
     st.set_page_config(page_title="unidash", layout="centered")
@@ -52,7 +8,7 @@ def main():
 
     # Sidebar
     st.sidebar.title("Navigation")
-    section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources", "Chatbot", "Profile"))
+    section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources", "Profile"))
 
     if section == "Home":
         show_homepage()
@@ -60,8 +16,6 @@ def main():
         show_clubs_resources()
     elif section == "University Resources":
         show_university_resources()
-    elif section == "Chatbot":
-        show_chatbot()
     elif section == "Profile":
         show_profile()
 
@@ -84,26 +38,6 @@ def show_university_resources():
     st.markdown("---")
 
     # ... Your university resources content ...
-
-def show_chatbot():
-    st.header("Chatbot - Predicting Questions")
-    st.markdown("---")
-
-    user_question = st.text_input("Ask a question:")
-    if user_question:
-        # Preprocess the user's question
-        user_question = preprocess_text(user_question)
-
-        # Calculate cosine similarity between user's question and previous year questions
-        user_question_vector = vectorizer.transform([user_question])
-        similarities = cosine_similarity(user_question_vector, question_vectors)
-
-        # Find the most similar question from previous year questions
-        most_similar_index = similarities.argmax()
-        suggested_question = previous_year_questions[most_similar_index]
-
-        st.subheader("Suggested Question for This Year:")
-        st.write(suggested_question)
 
 def show_profile():
     st.header("User Profile")
