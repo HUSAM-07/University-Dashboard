@@ -29,87 +29,44 @@ vectorizer = CountVectorizer()
 previous_year_questions = [preprocess_text(question) for question in previous_year_questions]
 question_vectors = vectorizer.fit_transform(previous_year_questions)
 
-# Sample user authentication (in a real app, use a proper authentication system)
-def authenticate(username, password):
-    return username == "user" and password == "password"
+# Sidebar configuration
+st.sidebar.title("Navigation")
+section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources", "Chatbot", "Profile"))
 
-# Sample data for user-specific content
-user_data = {
-    "user": {
-        "name": "John Doe",
-        "courses": ["Calculus", "Physics", "Computer Science"],
-        "bookmarks": ["How to study effectively", "Useful resources for Physics"]
-    }
-}
+# Main content
+st.set_page_config(page_title="University Student Dashboard", layout="centered")
+st.title("University Student Dashboard")
+st.markdown("---")
 
-# Function to fetch user data
-def get_user_data(username):
-    return user_data.get(username, {})
-
-def main():
-    st.set_page_config(page_title="unidash",layout="centered")
-    st.title("University Student Dashboard")
-    st.markdown("---")
-
-    # Sidebar
-    st.sidebar.title("Navigation")
-    section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources", "Chatbot", "Profile"))
-
-    if section == "Home":
-        show_homepage()
-    elif section == "Clubs Resources":
-        show_clubs_resources()
-    elif section == "University Resources":
-        show_university_resources()
-    elif section == "Chatbot":
-        show_chatbot()
-    elif section == "Profile":
-        show_profile()
-
-    st.divider()
-    st.caption("Designed & Developed by Mohammed Husamuddin")
-    st.caption("The app is designed using Streamlit")
-
-def show_homepage():
+if section == "Home":
     st.header("Welcome to the University Student Dashboard!")
     st.write("Use the sidebar to navigate to different sections.")
-
-def show_clubs_resources():
+elif section == "Clubs Resources":
     st.header("Clubs Resources")
     st.markdown("---")
-
     # ... Your club resources content ...
-
-def show_university_resources():
+elif section == "University Resources":
     st.header("University Resources")
     st.markdown("---")
-
     # ... Your university resources content ...
-
-def show_chatbot():
+elif section == "Chatbot":
     st.header("Chatbot - Predicting Questions")
     st.markdown("---")
-
     user_question = st.text_input("Ask a question:")
     if user_question:
         # Preprocess the user's question
         user_question = preprocess_text(user_question)
-
         # Calculate cosine similarity between user's question and previous year questions
         user_question_vector = vectorizer.transform([user_question])
         similarities = cosine_similarity(user_question_vector, question_vectors)
-
         # Find the most similar question from previous year questions
         most_similar_index = similarities.argmax()
         suggested_question = previous_year_questions[most_similar_index]
-
         st.subheader("Suggested Question for This Year:")
         st.write(suggested_question)
-
-def show_profile():
+elif section == "Profile":
     st.header("User Profile")
     st.markdown("---")
-
     st.sidebar.subheader("Login")
     username = st.sidebar.text_input("Username")
     password = st.sidebar.text_input("Password", type="password")
@@ -121,6 +78,3 @@ def show_profile():
             st.write(f"Bookmarks: {', '.join(user_info.get('bookmarks', []))}")
         else:
             st.warning("Invalid username or password.")
-
-if __name__ == '__main__':
-    main()
