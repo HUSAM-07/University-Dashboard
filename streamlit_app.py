@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 def main():
     st.set_page_config(layout="centered",page_title="unidash")
@@ -78,6 +79,11 @@ def show_university_resources():
         height=400,
         scrolling=True,
     )
+    
+    st.header("BITS Library Portal")
+
+    iframe_src = "https://library.bits-dubai.ac.ae/"
+    components.iframe(iframe_src)
 
     st.markdown("---")
     st.subheader("Courses & LMS")
