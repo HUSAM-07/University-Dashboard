@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 def main():
-    st.set_page_config(layout="centered",page_title="unidash")
+    st.set_page_config(layout="wide",page_title="unidash",page_icon="unidash.png")
     st.title("University Clubs Dashboard")
     st.markdown("---")
 
@@ -82,8 +82,28 @@ def show_university_resources():
     
     st.header("BITS Library Portal")
 
-    iframe_src = "https://library.bits-dubai.ac.ae/"
-    components.iframe(iframe_src)
+    # Define the URL to embed
+    EMBEDDED_URL = "http://webopac.bits-dubai.ac.ae/AutoLib/"
+
+    # Create a function to embed the frame
+    def embed_frame(url):
+        """Embeds a frame in the Streamlit app.
+
+        Args:
+            url: The URL of the frame to embed.
+
+        Returns:
+            None.
+        """
+
+        html = f"""
+        <iframe src="{url}" style="width: 100%; height: 100%;"></iframe>
+        """
+        components.html(html, height=600)
+
+    # Embed the frame in the Streamlit app
+    embed_frame(EMBEDDED_URL)
+
 
     st.markdown("---")
     st.subheader("Courses & LMS")
