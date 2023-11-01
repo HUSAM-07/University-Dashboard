@@ -38,35 +38,36 @@ def show_homepage():
 
     st.write("Get ready to embark on an enriched educational journey. Start exploring now!")
 
-def show_clubs_resources():
-    st.header("Clubs Resources")
-    st.markdown("---")
+with st.expander("See Club Resources"):
 
-    st.subheader("GDSC Resources")
-    st.components.v1.html(
-        f'<iframe src="https://gdscbpdc.github.io/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=True,
-    )
+        st.header("Clubs Resources")
+        st.markdown("---")
 
-    st.markdown("---")
-    st.subheader("ACM Resources")
-    st.components.v1.html(
-        f'<iframe src="https://openlib-cs.acmbpdc.org/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+        st.subheader("GDSC Resources")
+        st.components.v1.html(
+            f'<iframe src="https://gdscbpdc.github.io/" width="100%" height="400" style="border: none;"></iframe>',
+            width=800,
+            height=400,
+            scrolling=False,
+        )
 
-    st.markdown("---")
-    st.subheader("Ahmed Thahir's Notes")
-    st.components.v1.html(
-        f'<iframe src="https://uni-notes.netlify.app/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+        st.markdown("---")
+        st.subheader("ACM Resources")
+        st.components.v1.html(
+            f'<iframe src="https://openlib-cs.acmbpdc.org/" width="100%" height="400" style="border: none;"></iframe>',
+            width=800,
+            height=400,
+            scrolling=False,
+        )
+
+        st.markdown("---")
+        st.subheader("Ahmed Thahir's Notes")
+        st.components.v1.html(
+            f'<iframe src="https://uni-notes.netlify.app/" width="100%" height="400" style="border: none;"></iframe>',
+            width=800,
+            height=400,
+            scrolling=False,
+        )
 
 def show_university_resources():
     st.header("University Resources")
@@ -83,7 +84,7 @@ def show_university_resources():
     st.markdown("---")
     st.subheader("Courses & LMS")
     st.components.v1.html(
-        f'<iframe src="https://lms.bitspilanidubai.ae/login/index.php" width="100%" height="400" style="border: none;"></iframe>',
+        f'<iframe src="https://lms.bitspilanidubai.ae" width="100%" height="400" style="border: none;"></iframe>',
         width=800,
         height=400,
         scrolling=False,
