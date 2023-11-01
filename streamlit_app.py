@@ -56,7 +56,7 @@ def show_clubs_resources():
         f'<iframe src="https://openlib-cs.acmbpdc.org/" width="100%" height="400" style="border: none;"></iframe>',
         width=800,
         height=400,
-        scrolling=True,
+        scrolling=False,
     )
 
     st.markdown("---")
@@ -65,7 +65,7 @@ def show_clubs_resources():
         f'<iframe src="https://uni-notes.netlify.app/" width="100%" height="400" style="border: none;"></iframe>',
         width=800,
         height=400,
-        scrolling=True,
+        scrolling=False,
     )
 
 def show_university_resources():
@@ -74,36 +74,11 @@ def show_university_resources():
 
     st.subheader("Library Resources")
     st.components.v1.html(
-        f'<iframe src="http://webopac.bits-dubai.ac.ae/AutoLib/index.jsp" width="100%" height="400" style="border: none;"></iframe>',
+        f'<iframe src="http://webopac.bits-dubai.ac.ae/AutoLib/" width="100%" height="400" style="border: none;"></iframe>',
         width=800,
         height=400,
-        scrolling=True,
+        scrolling=False,
     )
-    
-    st.header("BITS Library Portal")
-
-    # Define the URL to embed
-    EMBEDDED_URL = "http://webopac.bits-dubai.ac.ae/AutoLib/"
-
-    # Create a function to embed the frame
-    def embed_frame(url):
-        """Embeds a frame in the Streamlit app.
-
-        Args:
-            url: The URL of the frame to embed.
-
-        Returns:
-            None.
-        """
-
-        html = f"""
-        <iframe src="{url}" style="width: 100%; height: 100%;"></iframe>
-        """
-        components.html(html, height=600)
-
-    # Embed the frame in the Streamlit app
-    embed_frame(EMBEDDED_URL)
-
 
     st.markdown("---")
     st.subheader("Courses & LMS")
@@ -111,7 +86,7 @@ def show_university_resources():
         f'<iframe src="https://lms.bitspilanidubai.ae/login/index.php" width="100%" height="400" style="border: none;"></iframe>',
         width=800,
         height=400,
-        scrolling=True,
+        scrolling=False,
     )
 
     st.markdown("---")
@@ -120,7 +95,7 @@ def show_university_resources():
         f'<iframe src="https://erp.bits-pilani.ac.in/" width="100%" height="400" style="border: none;"></iframe>',
         width=800,
         height=400,
-        scrolling=True,
+        scrolling=False,
     )
 
 if __name__ == '__main__':
