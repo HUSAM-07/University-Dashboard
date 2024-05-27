@@ -17,9 +17,23 @@ def main():
         show_clubs_resources()
 
     st.divider()
-    st.caption("Designed & Developed by HUSAM")
-    st.write("This Web App Is Made to Help You Access All The Important BITS Pilani, Dubai Admin & Academic Websites at a Single Website")
-    st.caption("The app is designed using Streamlit")
+    st.write("This Web App Is Made to Help You Access All The Important BITS Pilani, Dubai Admin & Academic Websites at a Single Place")
+    st.markdown("> Designed & Developed by HUSAM")
+    st.markdown("""
+        ## Contributors
+
+        This project is made possible by the following contributors:
+
+        - **Husam**: Designed and developed the web application.
+        - **Riddhi**: Developed the Time Table Generator.
+        - **Ahmed Thahir**: For Permitting us to Integrate his Uni-Notes Project.
+
+        Special thanks to my freinds and batchmates at BITS Pilani, Dubai for their support and resources.
+
+        ### Things I am working on:
+                - Notes for BioTech and Other Disciplines
+        ---
+    """)
 
 def show_homepage():
     st.header("Welcome to the University Dashboard!")

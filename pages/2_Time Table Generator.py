@@ -11,25 +11,6 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 from streamlit_js_eval import streamlit_js_eval
 
-im = Image.open('assets/App_Icon.png')
-image = Image.open("assets/3.png")
-width, height = image.size
-
-
-draw = ImageDraw.Draw(image)
-text = "Timetable Generator"
-font_path = "assets/VastShadow-Regular.ttf"
-font_size = 30 
-font = ImageFont.truetype(font_path, font_size)
-bbox = draw.textbbox((0, 0), text, font=font)
-text_width = bbox[2] - bbox[0]
-text_height = bbox[3] - bbox[1]
-
-x = (width - text_width) / 2
-y = (height - text_height) / 2
-
-draw.text((x, y), text, font=font, fill=(0, 0, 0))
-
 flag = True
 
 def remove_header(df):
@@ -486,11 +467,7 @@ third_year_second_semester_requirements = ('CS F363', 'CS F303', 'CS F364')
 third_year_second_semester_elective = ('ECON F211', 'MGTS F211')
 
 
-st.set_page_config(layout="wide", page_title="Timetable Generator", page_icon = im)
-st.image(image, use_column_width=True)
 col1, col2 = st.columns([10,2])
-col2.write("\n\n")
-col2.image("assets/blah3.gif", use_column_width=True)
 
 col1.markdown("""### Welcome to Your Very Own Timetable Application! 
 Exclusively for BITS Students! ✨ Do you find it difficult to understand the academic timetable shared by 
