@@ -11,3 +11,8 @@ python-constraint
 matplotlib
 Pillow
 streamlit-js-eval
+
+folium
+geojson
+shapely
+streamlit-folium
