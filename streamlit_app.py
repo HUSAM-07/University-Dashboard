@@ -8,7 +8,7 @@ def main():
 
     # Sidebar
     st.sidebar.title("Navigation")
-    section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources"))
+    section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources","Tools & Apps"))
 
     if section == "Home":
         show_homepage()
@@ -16,6 +16,8 @@ def main():
         show_clubs_resources()
     elif section == "University Resources":
         show_university_resources()
+    elif section == "Tools & Apps":
+        show_tools_apps()
 
     st.divider()
     st.caption("Designed & Developed by HUSAM")
@@ -97,6 +99,17 @@ def show_university_resources():
         height=400,
         scrolling=False,
     )
+
+def show_tools_apps():
+    st.header("Tools & Apps")
+    st.write("You can access the following tools and apps to enhance your learning and planning experience for academics.")
+    st.toggle("Google Calendar", "Access your academic calendar and plan your schedule.")
+    st.toggle("Find the Attendance Tracker Below,Track your attendance and manage your academic progress.")
+    st.toggle("Find the GPA Calculator Below,Calculate your GPA and plan your academic goals.")
+    st.toggle("Find the Grade Predictor Below, Predict your grades and plan your academic goals.")
+
+def show_footer():
+    st.write("Designed & Developed by HUSAM")
 
 if __name__ == '__main__':
     main()
