@@ -1,115 +1,126 @@
 import streamlit as st
-import streamlit.components.v1 as components
+import pandas as pd
+import calendar
+
+# Define a sample timetable for illustration purposes
+sample_timetable = {
+    'Course': ['CS F211', 'CS F212', 'CS F241', 'CS F211', 'ME F211'],
+    'Day': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    'Start Time': ['10:00', '09:00', '10:00', '11:00', '09:00'],
+    'End Time': ['11:00', '10:00', '11:00', '12:00', '10:00'],
+    'Location': ['6102', '6102', '1024', '6102', '1024'],
+    'Type': ['Lecture', 'Quiz', 'Lecture', 'Lecture', 'Lecture']
+}
 
 def main():
-    st.set_page_config(layout="wide",page_title="unidash",page_icon="unidash.png")
-    st.title("University Clubs Dashboard")
+    st.title("University Dashboard")
     st.markdown("---")
 
     # Sidebar
     st.sidebar.title("Navigation")
-    section = st.sidebar.selectbox("Go to", ("Home", "Clubs Resources", "University Resources","Tools & Apps"))
+    section = st.sidebar.selectbox("Go to", ("Home", "Calendar", "Timetable Creator", "University Resources", "Clubs Resources"))
 
     if section == "Home":
         show_homepage()
-    elif section == "Clubs Resources":
-        show_clubs_resources()
+    elif section == "Calendar":
+        show_calendar()
+    elif section == "Timetable Creator":
+        show_timetable_creator()
     elif section == "University Resources":
         show_university_resources()
-    elif section == "Tools & Apps":
-        show_tools_apps()
+    elif section == "Clubs Resources":
+        show_clubs_resources()
 
     st.divider()
     st.caption("Designed & Developed by HUSAM")
+    st.write("This Web App Is Made to Help You Access All The Important BITS Pilani, Dubai Admin & Academic Websites at a Single Website")
     st.caption("The app is designed using Streamlit")
 
 def show_homepage():
-    st.header("Welcome to the University Clubs Dashboard!")
-    st.write("Explore a world of opportunities and resources available at your fingertips with the University Clubs Dashboard. Whether you're a student looking to engage in exciting club activities or seeking essential university resources, this platform is your gateway to a richer and more fulfilling academic experience.")
+    st.header("Welcome to the University Dashboard!")
+    st.write("Use the sidebar to navigate to different sections.")
 
-    st.write("Navigate through the sidebar to discover the following sections:")
-
-    st.subheader("1. Home")
-    st.write("You are currently on the Home page. Use this page as a starting point to access various sections of the dashboard.")
-
-    st.subheader("2. Clubs Resources")
-    st.write("Discover a plethora of resources offered by your university clubs. From coding to gaming, explore materials, events, and updates from your favorite clubs, including GDSC and ACM.")
-
-    st.subheader("3. University Resources")
-    st.write("Access vital university resources with just a click. Explore the library's vast collection, log in to the Learning Management System (LMS) for your courses, and manage your academic life through BITS ERP.")
-
-    st.write("Get ready to embark on an enriched educational journey. Start exploring now!")
-
-def show_clubs_resources():
-    st.header("Clubs Resources")
+def show_calendar():
+    st.header("Calendar")
     st.markdown("---")
+    st.subheader("September 2023")
 
-    st.subheader("GDSC Resources")
-    st.components.v1.html(
-        f'<iframe src="https://gdscbpdc.github.io/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+    # Display a sample calendar
+    col1, col2 = st.columns(2)
 
+    with col1:
+        st.write("**Week View**")
+        calendar_data = pd.DataFrame(sample_timetable)
+        st.table(calendar_data)
+
+    with col2:
+        st.write("**Month View**")
+        st.markdown('<iframe src="https://calendar.google.com/calendar/embed?src=example%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="400" height="300" frameborder="0" scrolling="no"></iframe>', unsafe_allow_html=True)
+
+def show_timetable_creator():
+    st.header("Timetable Creator")
     st.markdown("---")
-    st.subheader("ACM Resources")
-    st.components.v1.html(
-        f'<iframe src="https://openlib-cs.acmbpdc.org/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+    
+    # Sample timetable form
+    with st.form("timetable_form"):
+        course = st.selectbox("Course", ['CS F211', 'CS F212', 'CS F241', 'ME F211'])
+        day = st.selectbox("Day", ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'])
+        start_time = st.time_input("Start Time")
+        end_time = st.time_input("End Time")
+        location = st.text_input("Location")
+        class_type = st.selectbox("Type", ['Lecture', 'Quiz', 'Lab'])
+        
+        submitted = st.form_submit_button("Submit")
+        
+        if submitted:
+            st.write(f"Course: {course}, Day: {day}, Start Time: {start_time}, End Time: {end_time}, Location: {location}, Type: {class_type}")
 
-    st.markdown("---")
-    st.subheader("Ahmed Thahir's Notes")
-    st.components.v1.html(
-        f'<iframe src="https://uni-notes.netlify.app/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+    st.write("Your Timetable")
+    timetable_data = pd.DataFrame(sample_timetable)
+    st.table(timetable_data)
 
 def show_university_resources():
     st.header("University Resources")
     st.markdown("---")
 
     st.subheader("Library Resources")
-    st.components.v1.html(
-        f'<iframe src="http://webopac.bits-dubai.ac.ae/AutoLib/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+    st.markdown('<div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;">'
+                '<iframe src="http://webopac.bits-dubai.ac.ae/AutoLib/index.jsp" width="1000" height="400"></iframe>'
+                '</div>', unsafe_allow_html=True)
 
     st.markdown("---")
     st.subheader("Courses & LMS")
-    st.components.v1.html(
-        f'<iframe src="https://lms.bitspilanidubai.ae" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+    st.markdown('<div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;">'
+                '<iframe src="https://lms.bitspilanidubai.ae/login/index.php" width="1000" height="400"></iframe>'
+                '</div>', unsafe_allow_html=True)
 
     st.markdown("---")
     st.subheader("BITS ERP")
-    st.components.v1.html(
-        f'<iframe src="https://erp.bits-pilani.ac.in/" width="100%" height="400" style="border: none;"></iframe>',
-        width=800,
-        height=400,
-        scrolling=False,
-    )
+    st.markdown('<div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;">'
+                '<iframe src="https://erp.bits-pilani.ac.in/" width="1000" height="400"></iframe>'
+                '</div>', unsafe_allow_html=True)
 
-def show_tools_apps():
-    st.header("Tools & Apps")
-    st.write("You can access the following tools and apps to enhance your learning and planning experience for academics.")
-    st.toggle("Google Calendar", "Access your academic calendar and plan your schedule.")
-    st.toggle("Find the Attendance Tracker Below,Track your attendance and manage your academic progress.")
-    st.toggle("Find the GPA Calculator Below,Calculate your GPA and plan your academic goals.")
-    st.toggle("Find the Grade Predictor Below, Predict your grades and plan your academic goals.")
+def show_clubs_resources():
+    st.header("Clubs Resources")
+    st.markdown("---")
+    st.markdown("Feel free to contribute")
 
-def show_footer():
-    st.write("Designed & Developed by HUSAM")
+    st.subheader("GDSC Resources")
+    st.markdown('<div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;">'
+                '<iframe src="https://gdscbpdc.github.io/" width="1000" height="400"></iframe>'
+                '</div>', unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.subheader("ACM Resources")
+    st.markdown('<div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;">'
+                '<iframe src="https://openlib-cs.acmbpdc.org/" width="1000" height="400"></iframe>'
+                '</div>', unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.subheader("Ahmed Thahir's Notes")
+    st.markdown('<div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;">'
+                '<iframe src="https://uni-notes.netlify.app/" width="1000" height="400"></iframe>'
+                '</div>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main()
