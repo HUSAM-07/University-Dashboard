@@ -28,7 +28,7 @@ def main():
         - **Riddhi**: Developed the Time Table Generator.
         - **Ahmed Thahir**: For Permitting us to Integrate his Uni-Notes Project.
 
-        Special thanks to my freinds and batchmates at BITS Pilani, Dubai for their support and resources.
+        Special thanks to my friends and batchmates at BITS Pilani, Dubai for their support and resources.
 
         ### Things I am working on:
                 - Notes for BioTech and Other Disciplines
